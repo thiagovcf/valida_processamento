@@ -8,7 +8,7 @@ spring:
         name: validaprocessamento
         
     datasource:
-        url: jdbc:mysql://${ip_banco}:3306/validaapp?autoReconnect=true
+        url: jdbc:mysql://${ip_banco}:3306/validaprocessamento?autoReconnect=true
         username: root
         password: ro0t
         driverClassName: com.mysql.jdbc.Driver
