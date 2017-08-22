@@ -1,0 +1,78 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="../../templates/templateGeral.xhtml">
+
+	<ui:define name="content">
+
+		<div class="row">
+			<div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+				<h1 class="page-title txt-color-blueDark">
+					<i class="fa-fw fa fa-user"></i> 
+						<h:outputLabel value="Incluir Emissor" rendered="#{emissorBean.emissor.id == null}"/> 
+						<h:outputLabel value="Alterar Emissor" rendered="#{emissorBean.alterar}"/> 
+						<h:outputLabel value="Visualizar Emissor" rendered="#{emissorBean.visualizar}"/> 
+				</h1>
+			</div>
+		</div>
+	
+		<h:form id="formIncluirAlterarEmissor" prependId="false">
+			<div class="">
+				<div class="well">
+					<fieldset>
+						<div class="form-group">
+							<div class="row">
+								<div class="col-sm-12 col-md-4">
+									<label class="control-label">Emissor: <sup>*</sup></label>
+									<h:inputText id="emissor" name="emissor" value="#{emissorBean.emissor.nome}" styleClass="form-control tagsinput" disabled="#{emissorBean.visualizar}" data-role="tagsinput" />
+								</div>
+							</div>	
+						</div>
+					</fieldset>
+					<fieldset>
+						<div class="form-group">
+							<div class="row">
+								<div class="col-md-2">
+										<h:selectOneMenu id="unidadeNegocio" styleClass="form-control input-sm" value="#{emissorBean.emissor.tipo}"  required="true" disabled="#{emissorBean.visualizar}">
+											<f:selectItem itemLabel="Selecione uma Unidade de Negocio"/>
+											<f:selectItem itemLabel="PRIVATE" itemValue="PRIVATE" />
+											<f:selectItem itemLabel="CONVENIO" itemValue="CONVENIO" />
+											<f:selectItem itemLabel="FROTA" itemValue="FROTA" />
+										</h:selectOneMenu>
+								</div>
+							</div>
+						</div>
+					</fieldset>
+					
+					<div class="form-actions">
+						<div class="row">
+							<div class="col-md-12">
+								<p:remoteCommand name="rcSalvar" action="#{emissorBean.salvar()}"/>
+								
+								<h:panelGroup rendered="#{emissorBean.alterar or emissorBean.emissor.id == null}">
+									<button type="submit" id="botaoSalvar" class="btn btn-primary" >
+											Salvar
+									</button>
+								</h:panelGroup>
+								
+								<h:panelGroup rendered="#{emissorBean.visualizar}">
+									<a type="button" class="btn btn-success" href="${request.contextPath}/alterarEmissor/codigoEmissor=#{emissorBean.emissor.id}" >
+										Alterar
+									</a>
+								</h:panelGroup>
+								<a type="button" class="btn btn-danger" href="${request.contextPath}/listarEmissor" >
+									Cancelar
+								</a>
+								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>		
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		</h:form>
+	
+	</ui:define>
+</ui:composition>

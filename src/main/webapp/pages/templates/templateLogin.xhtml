@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE HTML> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  id="extr-page">
+
+         <head>
+			<f:facet name="first">
+                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <link rel="shortcut icon" type="image/x-icon" href="#{request.contextPath}/images/favicon.ico"/>
+			</f:facet>
+	        
+			<link rel="stylesheet" type="text/css" media="screen" href="#{facesContext.externalContext.request.contextPath}/resources/css/bootstrap.min.css"/>
+			<link rel="stylesheet" type="text/css" media="screen" href="#{facesContext.externalContext.request.contextPath}/resources/css/font-awesome.min.css"/>
+			<link rel="stylesheet" type="text/css" media="screen" href="#{facesContext.externalContext.request.contextPath}/resources/css/smartadmin-production-plugins.min.css"/>
+			<link rel="stylesheet" type="text/css" media="screen" href="#{facesContext.externalContext.request.contextPath}/resources/css/smartadmin-production.min.css"/>
+			<link rel="stylesheet" type="text/css" media="screen" href="#{facesContext.externalContext.request.contextPath}/resources/css/smartadmin-skins.min.css"/>
+			<link rel="stylesheet" type="text/css" media="screen" href="#{facesContext.externalContext.request.contextPath}/resources/css/smartadmin-rtl.min.css"/> 
+			<link rel="stylesheet" type="text/css" media="screen" href="#{facesContext.externalContext.request.contextPath}/resources/css/demo.min.css"/>
+	
+			<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700"/>
+			<meta name="apple-mobile-web-app-capable" content="yes"/>
+			<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+			
+			<link rel="apple-touch-startup-image" href="#{facesContext.externalContext.request.contextPath}/resources/img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)"/>
+			<link rel="apple-touch-startup-image" href="#{facesContext.externalContext.request.contextPath}/resources/img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)"/>
+			<link rel="apple-touch-startup-image" href="#{facesContext.externalContext.request.contextPath}/resources/img/splash/iphone.png" media="screen and (max-device-width: 320px)"/>
+	        
+	        <title><h:outputText value="VALIDA APP" /></title>
+       	 </head>
+       	
+	     <h:body id="login" styleClass="animated fadeInDown ">
+			<header id="header">
+				<div id="logo-group">
+					<!-- <span id="logo"> <img src="#{facesContext.externalContext.request.contextPath}/resources/imagesApp/software_test.png" alt="Cidade" style="width:50px"/> </span> -->
+				</div>
+			</header>
+			
+			<div id="main" role="main" >
+				<div id="content" class="container">
+					<ui:insert name="conteudo" />
+				</div>
+			</div>		
+				
+			<script src="#{facesContext.externalContext.request.contextPath}/resources/js/plugin/pace/pace.min.js"></script>
+		    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+			<script src="#{facesContext.externalContext.request.contextPath}/resources/js/app.config.js"></script>
+			<script src="#{facesContext.externalContext.request.contextPath}/resources/js/bootstrap/bootstrap.min.js"></script>
+			<script src="#{facesContext.externalContext.request.contextPath}/resources/js/plugin/jquery-validate/jquery.validate.min.js"></script>
+			<script src="#{facesContext.externalContext.request.contextPath}/resources/js/plugin/masked-input/jquery.maskedinput.min.js"></script>
+			<script src="#{facesContext.externalContext.request.contextPath}/resources/js/app.min.js"></script>
+			
+		</h:body>       
+</html>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE HTML>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+	
+	<h:panelGroup rendered="#{not empty flash}">
+		<div id="alertMessage" class=" alert alert-#{flash.flash.tipo} alert-dismissable">
+			<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+			<strong>#{flash.flash.msg}</strong>
+		</div>
+	</h:panelGroup>
+	
+	<h:form>
+		<p:remoteCommand name="rcRemoverFlashMessage" actionListener="#{utilBean.removerFlashMessage()}"/>
+	</h:form>
+	
+	 <div style="display: none;" >
+   		<h:inputHidden id="mensagem" />
+   		<h:inputHidden id="tipo" />
+   		<h:inputHidden id="urlRedirect" />
+		<button id="botaoAlerta" />
+		<button id="botaoAlertaSweet" />
+		<button id="botaoAlertaSweetRedirect" />
+   	</div>
+	
+</ui:composition>

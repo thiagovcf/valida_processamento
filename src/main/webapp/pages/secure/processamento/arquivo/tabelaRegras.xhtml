@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE HTML>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+	
+	<div class="row">
+		<label class="label">Tabela de Regras</label>
+		<div class="table-responsive">
+			<h:panelGroup>
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th class="text-center">#</th>
+							<th class="text-center">Regras</th>
+							<h:panelGroup rendered="#{!fileFolderFtpBean.visualizar}">
+								<th class="text-center">Ações</th>
+							</h:panelGroup>
+						</tr>
+					</thead>
+					<tbody>
+						<ui:repeat value="#{fileFolderFtpBean.itensRegra}" var="regra" varStatus="status">
+							<tr class="success">
+								<td width="2%" align="center">
+									<h:outputLabel id="indexRegra#{status.index + 1}" value="#{status.index + 1}" />
+								</td>
+								<td width="20%">#{regra}</td>
+								<h:panelGroup rendered="#{!fileFolderFtpBean.visualizar}">
+									<td width="5%" class="text-center">
+										<p:commandLink actionListener="#{fileFolderFtpBean.removeRegra()}" styleClass="btn btn-sm btn-danger" update="painelRegras" >
+											<i class="fa fa-trash-o" />
+											<f:param name="indexRegra" value="#{status.index}" />
+										</p:commandLink>
+									</td>
+								</h:panelGroup>
+							</tr>
+						</ui:repeat>
+					</tbody>
+				</table>
+			</h:panelGroup>
+		</div>
+	</div>
+</ui:composition>

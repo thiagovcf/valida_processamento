@@ -1,0 +1,112 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="../templates/templateGeral.xhtml">
+
+	<ui:define name="content">
+		
+		<div class="row">
+			<div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+				<h1 class="page-title txt-color-blueDark">
+					<i class="fa-fw fa fa-history"></i> 
+						Processamento 
+				</h1>
+			</div>
+		</div>
+	
+		<h:form id="formVisualizarProcessamento">
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+			<div class="well">
+				<fieldset>
+					<div class="form-group">
+						<div class="row">
+							<div class="col-sm-12 col-md-2">
+								<div class="progress">
+									<div class="progress-bar bg-color-blue" data-transitiongoal="#{processamentoBean.processamento.percentualProc}"></div>
+								</div>
+							</div>
+							<div class="col-sm-12 col-md-2">
+							 	<a href="javascript:window.location.href=window.location.href" class="btn btn-primary">Atualizar </a>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+				<section id="widget-grid" class="">
+					<div class="row">
+						<article class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+								<div class="row">
+									<div class="col-sm-8 col-lg-8">
+									<!-- widget grid -->
+									<section id="widget-grid" class="">
+										<ui:repeat value="#{processamentoBean.emissoresProcessados}" var="emissorProcessado">
+											<div class="row">
+												<h:panelGroup rendered="#{emissorProcessado.statusProcessamentoEmissor == 'S'}">
+													<div  id="wid-id-3" class="jarviswidget jarviswidget-color-greenDark" data-widget-editbutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-collapsed="true">
+														<header>
+															<span class="widget-icon"> <i class="fa fa-check-square-o fa-lg"></i> </span>
+															<h2><strong><i>#{emissorProcessado.emissor.nome}</i></strong></h2>				
+														</header>
+														<div id="tabelaProcessoSucesso">
+															<ui:include src="tabelaProcessos.xhtml" />
+														</div>
+													</div>
+												</h:panelGroup>
+												<h:panelGroup rendered="#{emissorProcessado.statusProcessamentoEmissor == 'E'}">
+													<div id="wid-id-2" class="jarviswidget jarviswidget-color-redLight" data-widget-editbutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-collapsed="true">
+														<header>
+															<span class="widget-icon"> <i class="fa fa-warning fa-lg"></i> </span>
+															<h2><strong><i>#{emissorProcessado.emissor.nome}</i></strong></h2>				
+														</header>
+														<div>
+															<ui:include src="tabelaProcessos.xhtml" />
+														</div>
+													</div>
+												</h:panelGroup>
+											</div>
+										</ui:repeat>
+									</section>
+									</div>
+								</div>	
+						</article>
+					</div>
+				</section>
+			</div>
+		</h:form>
+		<script>
+			$(document).ready(function() {
+			
+				pageSetUp();
+				
+				// PAGE RELATED SCRIPTS
+			
+				// switch style change
+				$('input[name="checkbox-style"]').change(function() {
+					//alert($(this).val())
+					$this = $(this);
+			
+					if ($this.attr('value') === "switch-1") {
+						$("#switch-1").show();
+						$("#switch-2").hide();
+					} else if ($this.attr('value') === "switch-2") {
+						$("#switch-1").hide();
+						$("#switch-2").show();
+					}
+			
+				}); 
+				
+				// tab - pills toggle
+				$('#show-tabs').click(function() {
+					$this = $(this);
+					if($this.prop('checked')){
+						$("#widget-tab-1").removeClass("nav-pills").addClass("nav-tabs");
+					} else {
+						$("#widget-tab-1").removeClass("nav-tabs").addClass("nav-pills");
+					}
+					
+				});			
+			
+			});
+		</script>
+	</ui:define>
+</ui:composition>

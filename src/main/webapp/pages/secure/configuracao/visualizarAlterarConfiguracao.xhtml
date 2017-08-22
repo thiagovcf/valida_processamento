@@ -1,0 +1,118 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="../templates/templateGeral.xhtml">
+
+	<ui:define name="content">
+
+		<div class="row">
+			<div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+				<h1 class="page-title txt-color-blueDark">
+					<i class="fa-fw fa fa-user"></i> 
+						<h:outputLabel value="Alterar Configuração" rendered="#{configuracaoBean.alterar}"/> 
+						<h:outputLabel value="Visualizar Configuração" rendered="#{configuracaoBean.visualizar}"/> 
+				</h1>
+			</div>
+		</div>
+	
+		<h:form id="formVisualizarAlterarConfiguracao" prependId="false">
+			<div class="">
+				<div class="well">
+					<fieldset>
+						<div class="form-group">
+							<div class="row">
+								<div class="col-sm-12 col-md-4">
+									<label class="control-label">E-mail Destinatários: <sup>*</sup></label>
+									<h:inputText id="email" name="email" value="#{configuracaoBean.configuracao.emailDestinatarios}" styleClass="form-control tagsinput" disabled="#{configuracaoBean.visualizar}" data-role="tagsinput" />
+								</div>
+							</div>
+						</div>
+					</fieldset>
+					
+					<fieldset>
+						<div class="form-group">
+							<div class="row">
+								<div class="col-sm-12 col-md-4">
+									<label class="control-label">Total threads execução: <sup>*</sup></label>
+									<h:inputText id="totalThreads" name="totalThreads" value="#{configuracaoBean.configuracao.totalThreads}" styleClass="form-control" disabled="#{configuracaoBean.visualizar}"/>
+								</div>
+							</div>
+						</div>
+					</fieldset>
+					
+					<fieldset>
+						<div class="form-group">
+							<div class="row">
+								<div class="col-sm-12 col-md-4">
+									<label class="control-label">URL banco: <sup>*</sup></label>
+									<h:inputText id="urlBanco" name="urlBanco" value="#{configuracaoBean.configuracao.urlBanco}" styleClass="form-control" disabled="#{configuracaoBean.visualizar}"/>
+								</div>
+							</div>
+						</div>
+					</fieldset>
+					
+					<fieldset>
+						<div class="form-group">
+							<div class="row">
+								<div class="col-sm-12 col-md-4">
+									<label class="control-label">Login banco: <sup>*</sup></label>
+									<h:inputText id="loginBanco" name="loginBanco" value="#{configuracaoBean.configuracao.loginBanco}" styleClass="form-control" disabled="#{configuracaoBean.visualizar}"/>
+								</div>
+							</div>
+						</div>
+					</fieldset>
+					
+					<fieldset>
+						<div class="form-group">
+							<div class="row">
+								<div class="col-sm-12 col-md-4">
+									<label class="control-label">Senha banco: <sup>*</sup></label>
+									<h:inputText id="senhaBanco" name="senhaBanco" value="#{configuracaoBean.configuracao.loginBanco}" styleClass="form-control" disabled="#{configuracaoBean.visualizar}"/>
+								</div>
+							</div>
+						</div>
+					</fieldset>
+					
+					<fieldset>
+						<div class="form-group">
+							<div class="row">
+								<div class="col-sm-12 col-md-4">
+									<label class="control-label">Canal Slack: <sup>*</sup></label>
+									<h:inputText id="canalSlack" name="canalSlack" value="#{configuracaoBean.configuracao.canalSlack}" styleClass="form-control" disabled="#{configuracaoBean.visualizar}"/>
+								</div>
+							</div>
+						</div>
+					</fieldset>
+					
+					<h:commandButton value="Teste2" actionListener="#{configuracaoBean.teste2()}" />
+					
+					
+					<div class="form-actions">
+						<div class="row">
+							<div class="col-md-12">
+								<p:remoteCommand name="rcSalvar" action="#{configuracaoBean.salvar()}"/>
+								
+								<h:panelGroup rendered="#{configuracaoBean.alterar}">
+									<button type="submit" id="botaoSalvar" class="btn btn-primary" >
+											Salvar
+									</button>
+								</h:panelGroup>
+								
+								<h:panelGroup rendered="#{configuracaoBean.visualizar}">
+									<a type="button" class="btn btn-success" href="${request.contextPath}/alterarConfiguracao" >
+										Alterar
+									</a>
+								</h:panelGroup>
+								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>			
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		</h:form>
+	
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,125 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="../../templates/templateGeral.xhtml">
+
+	<ui:define name="content">
+
+		<div class="row">
+			<div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+				<h1 class="page-title txt-color-blueDark">
+					<i class="fa-fw fa fa-group"></i>
+						<h:outputLabel value="Incluir Grupo" rendered="#{grupoBean.grupo.id == null}"/> 
+						<h:outputLabel value="Alterar Grupo" rendered="#{grupoBean.alterar}"/> 
+						<h:outputLabel value="Visualizar Grupo" rendered="#{grupoBean.visualizar}"/> 
+				</h1>
+			</div>
+		</div>
+		<h:form id="formIncluirAlterarGrupo" prependId="false">
+			<div class="">
+				<div class="well">
+					<fieldset>
+						<div class="form-group">
+							<div class="row">
+								<div class="col-sm-12 col-md-6">
+									<label class="control-label">Nome: <sup>*</sup></label>
+									<p:remoteCommand name="rcDisponibilidade" actionListener="#{grupoBean.verificaDiponibilidadeGrupo()}"/>
+									<h:inputText id="nome" name="nome" value="#{grupoBean.grupo.nome}" onblur="rcDisponibilidade()" styleClass="form-control" disabled="#{grupoBean.visualizar}"/> 
+								</div>
+							</div>
+						</div>
+					</fieldset>
+					
+					<fieldset>
+						<div class="form-group">
+							<div class="row">
+								<div class="col-sm-12 col-md-6">
+									<label class="control-label">Descrição: <sup>*</sup></label>
+									<h:inputTextarea id="descricao" name="decricao" value="#{grupoBean.grupo.descricao}" rows="3" cols="70" styleClass="form-control" disabled="#{grupoBean.visualizar}"/> 
+								</div>
+							</div>
+						</div>
+					</fieldset>
+					
+					<fieldset>
+						<legend>Perfil do Grupo:</legend>
+						<fieldset>
+							<div class="form-group">
+								<div class="row">
+									<div class="col-sm-12 col-md-12">
+										<label class="control-label">Grupo de Usuário</label>
+									</div>
+									<div class="col-sm-12 col-md-10">
+										<label class="radio radio-inline no-margin">
+											<input type="radio" name="grupo" value="NENHUM" class="radiobox style-2" checked="checked"/>
+											<span>Nenhum</span> 
+										</label>
+										<label class="radio radio-inline">
+											<input id="radio_visualizar_grupo" type="radio" name="grupo" value="VISUALIZAR_GRUPO" class="radiobox style-2" />
+											<span>Visualizar</span> 
+										</label>
+										<label class="radio radio-inline">
+											<input id="radio_alterar_grupo" type="radio" name="grupo" value="ALTERAR_GRUPO" class="radiobox style-2" />
+											<span>Alterar</span> 
+										</label>
+									</div>
+								</div>
+							</div>
+						</fieldset>
+						<fieldset>
+							<div class="form-group">
+								<div class="row">
+									<div class="col-sm-12 col-md-12">
+										<label class="control-label">Usuários</label>
+									</div>
+									<div class="col-sm-12 col-md-10">
+										<label class="radio radio-inline no-margin">
+											<input type="radio" name="usuario" value="NENHUM" class="radiobox style-2" checked="checked" />
+											<span>Nenhum</span> 
+										</label>
+										<label class="radio radio-inline">
+											<input id="radio_visualizar_usuario" type="radio" name="usuario" value="VISUALIZAR_USUARIO" class="radiobox style-2" />
+											<span>Visualizar</span> 
+										</label>
+										<label class="radio radio-inline">
+											<input id="radio_alterar_usuario" type="radio" name="usuario" value="ALTERAR_USUARIO" class="radiobox style-2" />
+											<span>Alterar</span> 
+										</label>
+									</div>
+								</div>
+							</div>
+						</fieldset>
+					</fieldset>
+					
+					<div class="form-actions">
+						<div class="row">
+							<div class="col-md-12">
+								<p:remoteCommand name="rcSalvar" action="#{grupoBean.salvar()}"/>
+								
+								<h:panelGroup rendered="#{grupoBean.alterar or grupoBean.grupo.id == null}">
+									<button type="submit" id="botaoSalvar" class="btn btn-primary" >
+											Salvar
+									</button>
+								</h:panelGroup>
+								
+								<h:panelGroup rendered="#{grupoBean.visualizar}">
+									<a type="button" class="btn btn-success" href="${request.contextPath}/alterarGrupo/codigoGrupo=#{grupoBean.grupo.id}" >
+										Alterar
+									</a>
+								</h:panelGroup>
+								
+								<a type="button" class="btn btn-danger" href="${request.contextPath}/listarGrupo" >
+									Cancelar
+								</a>
+								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>			
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		</h:form>
+	</ui:define>
+</ui:composition>
