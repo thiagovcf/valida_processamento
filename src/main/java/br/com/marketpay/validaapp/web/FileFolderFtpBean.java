@@ -157,5 +157,7 @@ public class FileFolderFtpBean extends BeanAbstract implements Serializable{
 		fileFolderFtpEmissor.setRegraNomeArquivo(regraNomeArquivo.toString());
 	}
 	
-	
+	public FileFolderFtpEmissor isExistFileInFolder(FolderFpt folder) {
+		return fileFolderFtpEmissorService.findByFolder(folder);
+	}
 }

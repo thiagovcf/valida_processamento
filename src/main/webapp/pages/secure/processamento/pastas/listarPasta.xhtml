@@ -62,12 +62,20 @@
 							<ui:repeat value="#{folderFtpBean.foldersFtp}" var="folder" >
 								<tr class="success">
 									<td width="20%" >#{folder.emissor.nome}</td>
-									<td width="30%" class="text-center">#{folder.nome}</td>
-									<td width="40%" class="text-center">#{folder.path}</td>
-									<td width="10%" class="text-center">
-	                                   <a href="${request.contextPath}/codigoPasta=#{folder.id}/visualizarConfigurarArquivo" class="btn btn-sm btn-warning" style="font-size:7px">
-                                   			<span class="fa fa-cogs" style="font-size:10px"/>
-					                   </a>
+									<td width="20%" class="text-center">#{folder.nome}</td>
+									<td width="30%" class="text-center">#{folder.path}</td>
+									<td width="30%" class="text-center">
+										<h:panelGroup rendered="#{fileFolderFtpBean.isExistFileInFolder(folder) == null}">
+		                                   <a href="${request.contextPath}/codigoPasta=#{folder.id}/visualizarConfigurarArquivo" class="btn btn-sm btn-danger" style="font-size:7px">
+	                                   			<span class="fa fa-cogs" style="font-size:10px"/>
+						                   </a>
+										</h:panelGroup>
+										<h:panelGroup rendered="#{fileFolderFtpBean.isExistFileInFolder(folder) != null}">
+											<a href="${request.contextPath}/codigoPasta=#{folder.id}/visualizarConfigurarArquivo" class="btn btn-sm btn-warning" style="font-size:7px">
+		                                   			<span class="fa fa-cogs" style="font-size:10px"/>
+							                </a>
+										</h:panelGroup>
+										
 	                                   <a href="${request.contextPath}/visualizarPasta/codigoPasta=#{folder.id}" class="btn btn-sm btn-primary" style="font-size:7px">
                                    			<span class="fa fa-search" style="font-size:10px"/>
 					                   </a>
@@ -79,6 +87,18 @@
 							</ui:repeat>
 						</tbody>
 					</table>
+				</div>
+			</div>
+			<br/>
+			<div class="col-sm-12">
+				<div class="col col-2">
+					<span class="btn btn-sm btn-danger" style="font-size:10px"> <i class="fa fa-cogs"></i> </span>
+					<strong>Não possui regra</strong>		
+				</div>
+				
+				<div class="col col-2">
+					<span class="btn btn-sm btn-warning" style="font-size:10px"> <i class="fa fa-cogs"></i> </span>
+					<strong>Visualizar regra</strong>	
 				</div>
 			</div>
 		</h:form>

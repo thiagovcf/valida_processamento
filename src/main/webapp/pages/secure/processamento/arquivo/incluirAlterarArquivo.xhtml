@@ -10,10 +10,12 @@
 		<div class="row">
 			<div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
 				<h1 class="page-title txt-color-blueDark">
-					<i class="fa-fw fa fa-user"></i>
-					<h:outputLabel value="Incluir Arquivo" rendered="#{fileFolderFtpBean.fileFolderFtpEmissor.id == null}" />
-					<h:outputLabel value="Alterar Pasta" rendered="#{fileFolderFtpBean.alterar}" />
-					<h:outputLabel value="Visualizar Pasta"	rendered="#{fileFolderFtpBean.visualizar}" />
+					<i class="fa-fw fa fa-file"></i>
+					<h:outputLabel value="Manter Arquivo" rendered="#{fileFolderFtpBean.alterar}" />
+					<h:outputLabel value="Visualizar Arquivo"	rendered="#{fileFolderFtpBean.visualizar}" />
+						<span class="page-title txt-color-blueDark">> 
+							<strong>Emissor:</strong> #{fileFolderFtpBean.folderFtp.emissor.nome.toLowerCase()}
+						</span>
 				</h1>
 			</div>
 		</div>

@@ -34,7 +34,7 @@ public class ValidaApp extends SpringBootServletInitializer {
 		Environment env = app.run(args).getEnvironment();
 		
 		log.info("\n----------------------------------------------------------\n\t" +
-                "Validaapp está rodando! Acesse uma das URLs:\n\t" +
+                "Valida Processamento está rodando! Acesse uma das URLs:\n\t" +
                 "Local: \t\thttp://localhost:{}{}\n\t" +
                 "Externa: \thttp://{}:{}{}\n----------------------------------------------------------",
             env.getProperty("server.port"),

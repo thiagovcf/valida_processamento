@@ -92,7 +92,7 @@ public class FolderFtpBean extends BeanAbstract implements Serializable{
 		}else {
 			emissor = emissorService.findById(emissor.getId());
 
-			if(StringUtils.isBlank(pesquisaNomePasta.trim())) {
+			if(StringUtils.isNotBlank(pesquisaNomePasta.trim())) {
 				foldersFtp = folderFtpEmissorService.findAllByNomeIgnoreCaseContainingAndEmissor(pesquisaNomePasta, emissor);
 			}else {
 				foldersFtp = folderFtpEmissorService.findByEmissor(emissor);
