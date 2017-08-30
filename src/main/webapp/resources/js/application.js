@@ -208,7 +208,7 @@ function configuraTelaListar(){
 	})
 }
 
-if($(location).attr('pathname') == "/incluirUsuario"){
+if($(location).attr('pathname').match("/incluirUsuario")){
 	initBootstrapDualListbox();
 }
 
