@@ -49,6 +49,9 @@ public class FileFolderFtpEmissor implements Serializable {
 	@Column(name = "VALOR_TIPO_PERIODO_EXECUCAO")
 	private String valorTipoPeriodoExecucao;
 
+	@Column(name = "CHECK_ARQUIVO_DIA_MENOS_UM")
+	private Boolean checkArquivoDiaMenosUm ;
+	
 	@OneToOne
 	@JoinColumn(name = "ID_FOLDER_FTP")
 	private FolderFpt folder;

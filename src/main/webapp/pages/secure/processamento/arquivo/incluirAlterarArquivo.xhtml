@@ -43,6 +43,19 @@
 							</fieldset>
 							<fieldset>
 								<div class="form-group">
+								<label class="control-label">A nomeclatura do arquivo é D-1 ?<sup>*</sup></label>
+									<div class="row">
+										<div class="col-sm-12 ">
+											<h:selectOneMenu id="checkArquivoDiaMenosUm" value ="#{fileFolderFtpBean.fileFolderFtpEmissor.checkArquivoDiaMenosUm}" >
+												  <f:selectItem itemValue="#{false}" itemLabel="Não" />
+												  <f:selectItem itemValue="#{true}" itemLabel="Sim"/>
+											</h:selectOneMenu>
+										</div>
+									</div>	
+								</div>
+							</fieldset>
+							<fieldset>
+								<div class="form-group">
 								<label class="control-label">Periodo: <sup>*</sup></label>
 									<div class="row">
 										<div class="col-sm-12 ">
@@ -172,6 +185,24 @@
 								<div class="col-sm-6 col-md-6">
 									<label class="control-label">Nome Arquivo: <sup>*</sup></label>
 									<h:inputText value="#{fileFolderFtpBean.fileFolderFtpEmissor.nome}" styleClass="form-control tagsinput" disabled="#{fileFolderFtpBean.visualizar}" data-role="tagsinput" />
+								</div>
+							</div>
+						</div>
+					</fieldset>
+					<fieldset>
+						<div class="form-group">
+							<div class="row">
+								<div class="col-sm-6 col-md-6">
+									<label class="control-label">A nomeclatura do arquivo é D-1 ?<sup>*</sup></label>
+									
+									<h:panelGroup rendered="#{fileFolderFtpBean.fileFolderFtpEmissor.checkArquivoDiaMenosUm == true}">
+										<h:inputText value="SIM" styleClass="form-control tagsinput" disabled="#{fileFolderFtpBean.visualizar}" data-role="tagsinput" />
+									</h:panelGroup>
+									
+									<h:panelGroup rendered="#{fileFolderFtpBean.fileFolderFtpEmissor.checkArquivoDiaMenosUm == false}">
+										<h:inputText value="NAO" styleClass="form-control tagsinput" disabled="#{fileFolderFtpBean.visualizar}" data-role="tagsinput" />
+									</h:panelGroup>
+																		
 								</div>
 							</div>
 						</div>

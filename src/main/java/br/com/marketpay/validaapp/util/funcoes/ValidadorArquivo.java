@@ -77,7 +77,12 @@ public class ValidadorArquivo {
 						break;
 					case TIPO_REGRA_DATA:
 						DateTimeFormatter formatador = DateTimeFormatter.ofPattern(valorRegra);
-						LocalDateTime data =LocalDateTime.now();
+						LocalDateTime data;
+						if(fileFolderFtpEmissor.getCheckArquivoDiaMenosUm()) {
+							data =LocalDateTime.now().minusDays(1);
+						}else {
+							data =LocalDateTime.now();
+						}
 						nomeArquivo.append(data.format(formatador));
 						break;
 					case TIPO_REGRA_ALEATORIA:

@@ -7,14 +7,17 @@ import java.util.List;
 
 import javax.faces.context.FacesContext;
 
+import org.primefaces.component.password.Password;
 import org.primefaces.context.RequestContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.marketpay.validaapp.entity.Grupo;
 import br.com.marketpay.validaapp.entity.ProcessAlterarSenha;
 import br.com.marketpay.validaapp.entity.Usuario;
+import br.com.marketpay.validaapp.security.PasswordGenerator;
 import br.com.marketpay.validaapp.service.ProcessAlterarSenhaService;
 import br.com.marketpay.validaapp.service.UsuarioService;
 import br.com.marketpay.validaapp.web.util.Flash;
@@ -78,7 +81,7 @@ public class UsuarioBean extends BeanAbstract implements Serializable{
 
 		usuario.setGrupos(null);
 
-		usuario.setSenha("123456");
+		usuario.setSenha(new BCryptPasswordEncoder().encode("123456"));
 		
 		if(paramGrupos != null && !paramGrupos.isEmpty()){
 			String[] grupos = paramGrupos.split(",");
