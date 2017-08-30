@@ -41,7 +41,7 @@ public class ThreadEmail extends Thread implements Serializable{
             veloContext.put("mensagens", mesagens);
             veloContext.put("mensagemLink", mensagemLink);
             
-            veloContext.put("informacaoContato", "informacaoContato");
+            veloContext.put("informacaoContato", "Contato");
             veloContext.put("telefone", "telefone");
             
             VelocityUtil.getInstancia().init(diretorio);

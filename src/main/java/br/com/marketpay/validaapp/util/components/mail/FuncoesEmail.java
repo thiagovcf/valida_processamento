@@ -3,7 +3,6 @@ package br.com.marketpay.validaapp.util.components.mail;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.mail.MessagingException;
@@ -17,7 +16,7 @@ public class FuncoesEmail {
 		 mj.setUserMail(FuncoesArquivo.getInstance().getValorProperties("mail.user"));
 		 mj.setPassMail(FuncoesArquivo.getInstance().getValorProperties("mail.password"));		         
          mj.setBodyMail(texto);
-         mj.setSubjectMail("ASSUNTO");
+         mj.setSubjectMail("Valida Processamento");
          mj.setFromNameMail(FuncoesArquivo.getInstance().getValorProperties("mail.from"));
          mj.setDestinatarios(emails);
          
@@ -36,7 +35,7 @@ public class FuncoesEmail {
 		mj.setUserMail(FuncoesArquivo.getInstance().getValorProperties("mail.user"));
 		mj.setPassMail(FuncoesArquivo.getInstance().getValorProperties("mail.password"));		         
         mj.setBodyMail(texto);
-        mj.setSubjectMail("Job iContabil");
+        mj.setSubjectMail("Valida Processamento");
         mj.setFromNameMail(FuncoesArquivo.getInstance().getValorProperties("mail.from"));
         
         List<String> destinatario = new ArrayList<String>();
@@ -54,7 +53,7 @@ public class FuncoesEmail {
         }
     }
 	
-	public static void enviaEmailTest(List<String> emails, String texto) throws IOException {
+	/*public static void enviaEmailTest(List<String> emails, String texto) throws IOException {
 		Mail mj = new Mail();
 		
 		mj.setUserMail("AKIAJWDTIQUM7QAE4LBQ");
@@ -72,7 +71,7 @@ public class FuncoesEmail {
 			e.printStackTrace(); 
 		}
 	}
-	
+	*/
 //	public static void main(String[] args) throws IOException {
 //		System.out.println("Enviando...");
 //		enviaEmailTest(Arrays.asList("andremarllusxs@gmail.com"), "Teste");

@@ -6,7 +6,7 @@ import java.util.Properties;
 
 public class FuncoesArquivo {
 
-	private final static String FILE = "validaapp.properties";
+	private final static String FILE = "application.properties";
 
     private static Properties props = new Properties();
 
