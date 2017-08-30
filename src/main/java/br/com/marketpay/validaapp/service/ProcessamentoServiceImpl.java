@@ -23,7 +23,9 @@ import br.com.marketpay.validaapp.repository.ProcessamentoEmissorRepository;
 import br.com.marketpay.validaapp.repository.ProcessamentoRepository;
 import br.com.marketpay.validaapp.util.ftp.FTPUtil;
 import br.com.marketpay.validaapp.util.funcoes.ValidadorArquivo;
+import lombok.extern.log4j.Log4j;
 
+@Log4j
 @Service
 public class ProcessamentoServiceImpl implements ProcessamentoService{
 
@@ -72,11 +74,15 @@ public class ProcessamentoServiceImpl implements ProcessamentoService{
 						
 						for(FolderFpt pasta : folderFtpRepository.findAllByEmissor(emissor)) {
 							
-							processamentoArquivo = processamentoRotinaCheckArquivo(pasta, processamentoEmissor);
+							try {
+								processamentoArquivo = processamentoRotinaCheckArquivo(pasta, processamentoEmissor);
+								salvarArquivoProcessado(processamentoArquivo);
+								arquivosProcessados.add(processamentoArquivo);
+								
+							} catch (Exception e) {
+								log.error(e);
+							}
 							
-							salvarArquivoProcessado(processamentoArquivo);
-							
-							arquivosProcessados.add(processamentoArquivo);
 						}
 						
 						boolean present = arquivosProcessados.stream().filter(
@@ -109,7 +115,7 @@ public class ProcessamentoServiceImpl implements ProcessamentoService{
 		return processamento;
 	}
 	
-	public ProcessamentoArquivo processamentoRotinaCheckArquivo(FolderFpt pasta, ProcessamentoEmissor processamentoEmissor) {
+	public ProcessamentoArquivo processamentoRotinaCheckArquivo(FolderFpt pasta, ProcessamentoEmissor processamentoEmissor) throws Exception {
 		
 		ValidadorArquivo validadorArquivo= new ValidadorArquivo();
 		boolean isErro = false;
@@ -124,10 +130,15 @@ public class ProcessamentoServiceImpl implements ProcessamentoService{
 			
 		}
 	 	FileFolderFtpEmissor fileFolderFtpEmissor = fileFolderFtpEmissorRepository.findByFolder(pasta);
+	 	
 	 	//SE A PASTA NAO TIVER REGRA(ARQUIVO) CONFIGURADO
 	 	if(fileFolderFtpEmissor == null) {
-	 		processamentoArquivo = preencheObjetoArquivo(ProcessamentoArquivo.STATUS_PROCESSAMENTO_FALHA,LocalDateTime.now(),ProcessamentoArquivo.DESCRICAO_CONFIG_SEM_PASTA.concat("[ "+pasta.getNome()+"]"), processamentoEmissor, fileFolderFtpEmissor);
-	 		return processamentoArquivo;
+	 			 		
+			processamentoArquivo = preencheObjetoArquivo(ProcessamentoArquivo.STATUS_PROCESSAMENTO_FALHA,LocalDateTime.now(),ProcessamentoArquivo.DESCRICAO_CONFIG_SEM_PASTA.concat("[ "+pasta.getNome()+"]"), processamentoEmissor, fileFolderFtpEmissor);
+	 		
+	 		throw new Exception(ProcessamentoArquivo.DESCRICAO_CONFIG_SEM_PASTA.concat("[ "+pasta.getNome()+"]"));
+	 		//return null;
+	 		
 	 	}
 	 	
 		if(!isErro) {

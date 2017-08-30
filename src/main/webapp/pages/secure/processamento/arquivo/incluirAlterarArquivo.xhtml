@@ -43,15 +43,15 @@
 							</fieldset>
 							<fieldset>
 								<div class="form-group">
-								<label class="control-label">A nomeclatura do arquivo é D-1 ?<sup>*</sup></label>
+									<label class="control-label">A nomeclatura do arquivo é D-1 ?<sup>*</sup></label>
 									<div class="row">
-										<div class="col-sm-12 ">
-											<h:selectOneMenu id="checkArquivoDiaMenosUm" value ="#{fileFolderFtpBean.fileFolderFtpEmissor.checkArquivoDiaMenosUm}" >
-												  <f:selectItem itemValue="#{false}" itemLabel="Não" />
-												  <f:selectItem itemValue="#{true}" itemLabel="Sim"/>
+										<div class="col-md-2">
+											<h:selectOneMenu id="checkArquivoDiaMenosUm" styleClass="form-control input-sm" value ="#{fileFolderFtpBean.fileFolderFtpEmissor.checkArquivoDiaMenosUm}" >
+												<f:selectItem itemValue="#{false}" itemLabel="NÃO" />
+												<f:selectItem itemValue="#{true}" itemLabel="SIM" />
 											</h:selectOneMenu>
 										</div>
-									</div>	
+									</div>
 								</div>
 							</fieldset>
 							<fieldset>
