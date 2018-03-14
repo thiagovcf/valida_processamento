@@ -21,4 +21,7 @@ public class ValidaAppPages {
 	public static final String PAGINA_ALTERAR_FILE = "pretty:alterarConfigurarArquivo";
 	
 	public static final String PAGINA_VISUALIZAR_PROCESSAMENTO= "pretty:visualizarProcessamento";
+	
+	public static final String PAGINA_VISUALIZAR_CLIENTE = "pretty:visualizarCliente";
+	public static final String PAGINA_ALTERAR_CLIENTE = "pretty:alterarCliente";
 }

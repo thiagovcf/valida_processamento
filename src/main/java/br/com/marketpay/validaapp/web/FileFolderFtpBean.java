@@ -160,4 +160,12 @@ public class FileFolderFtpBean extends BeanAbstract implements Serializable{
 	public FileFolderFtpEmissor isExistFileInFolder(FolderFpt folder) {
 		return fileFolderFtpEmissorService.findByFolder(folder);
 	}
+	
+	public String getTipoRotinaFile(FolderFpt folder) {
+		FileFolderFtpEmissor file = fileFolderFtpEmissorService.findByFolder(folder);
+		if (file == null) {
+			return "";
+		}
+		return file.getTipoPeriodoExecucao();
+	}
 }

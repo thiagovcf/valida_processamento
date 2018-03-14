@@ -56,16 +56,22 @@
 									<th class="text-center" >Emissor</th>
 									<th class="text-center" >Nome Pasta</th>
 									<th class="text-center" >Diretorio</th>
+									<th class="text-center" >Rotina</th>
 									<th class="text-center" >Ações</th>
 								</tr>
 							</thead>
 							<tbody>
 								<ui:repeat value="#{folderFtpBean.foldersFtp}" var="folder" >
 									<tr class="success">
-										<td width="20%" >#{folder.emissor.nome}</td>
-										<td width="20%" class="text-center">#{folder.nome}</td>
+										<td width="15%" >#{folder.emissor.nome}</td>
+										<td width="15%" class="text-center">#{folder.nome}</td>
 										<td width="30%" class="text-center">#{folder.path}</td>
-										<td width="30%" class="text-center">
+										<td width="20%" class="text-center">
+											<h:panelGroup rendered="#{fileFolderFtpBean.getTipoRotinaFile(folder) == 'S'}">Semanal</h:panelGroup>
+											<h:panelGroup rendered="#{fileFolderFtpBean.getTipoRotinaFile(folder) == 'D'}">Diário</h:panelGroup>
+											<h:panelGroup rendered="#{fileFolderFtpBean.getTipoRotinaFile(folder) == 'M'}">Mensal</h:panelGroup>
+										</td>
+										<td width="20%" class="text-center">
 											<h:panelGroup rendered="#{fileFolderFtpBean.isExistFileInFolder(folder) == null}">
 			                                   <a href="${request.contextPath}/codigoPasta=#{folder.id}/visualizarConfigurarArquivo" class="btn btn-sm btn-danger" style="font-size:7px">
 		                                   			<span class="fa fa-cogs" style="font-size:10px"/>

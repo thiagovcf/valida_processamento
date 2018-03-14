@@ -240,6 +240,43 @@ jQuery(document).ready(function(){
 		e.preventDefault();
 		rcSalvar();
 	});
+	$("#formIncluirAlterarCliente").bootstrapValidator({
+		feedbackIcons : {
+			valid : 'glyphicon glyphicon-ok',
+			invalid : 'glyphicon glyphicon-remove',
+			validating : 'glyphicon glyphicon-refresh'
+		},
+		
+		fields : {
+			nome : {
+				validators : {
+					notEmpty : {
+						message : 'Campo Obrigatório'
+					}
+				}
+			},
+		
+			cpf : {
+				validators : {
+					notEmpty : {
+						message : 'Campo Obrigatório'
+					}
+				}
+			},
+			
+			statusCliente : {
+				validators : {
+					notEmpty : {
+						message : 'Campo Obrigatório'
+					}
+				}
+			}
+		}
+		
+	}).on('success.form.bv', function(e) {
+		e.preventDefault();
+		rcSalvar();
+	});
 	
 	$("#formIncluirAlterarPasta").bootstrapValidator({
 		feedbackIcons : {

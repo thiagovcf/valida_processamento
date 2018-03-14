@@ -1,0 +1,131 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="../templates/templateGeral.xhtml">
+
+	<ui:define name="content">
+
+		<div class="row">
+			<div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+				<h1 class="page-title txt-color-blueDark">
+					<i class="fa-fw fa fa-user"></i> 
+						<h:outputLabel value="Incluir Cliente" rendered="#{clienteBean.cliente.id == null}"/> 
+						<h:outputLabel value="Alterar Cliente" rendered="#{clienteBean.alterar}"/> 
+						<h:outputLabel value="Visualizar Cliente" rendered="#{clienteBean.visualizar}"/> 
+				</h1>
+			</div>
+		</div>
+	
+		<h:form id="formIncluirAlterarCliente" prependId="false">
+			<div class="">
+				<div class="well">
+					<fieldset>
+						<div class="form-group">
+							<div class="row">
+								<div class="col-sm-12 col-md-6">
+									<label class="control-label">Nome: <sup>*</sup></label>
+									<h:inputText id="nome" name="nome" value="#{clienteBean.cliente.nome}"  styleClass="form-control" disabled="#{clienteBean.visualizar}"/>  
+								</div>
+							</div>
+						</div>
+					</fieldset>
+					
+					<fieldset>
+						<div class="form-group">
+							<div class="row">
+								<div class="col-sm-12 col-md-2">
+									<label class="control-label">CPF: <sup>*</sup></label>
+									<h:inputText id="cpf" name="cpf" value="#{clienteBean.cliente.cpf}" mask="999.999.999-99" styleClass="form-control" disabled="#{clienteBean.visualizar}"/>
+								</div>
+							</div>
+						</div>
+					</fieldset>
+					
+					<fieldset>
+						<div class="form-group">
+							<label class="control-label">Ativo?<sup>*</sup></label>
+							<div class="row">
+								<div class="col-md-2">
+									<h:selectOneMenu id="status" styleClass="form-control input-sm" value ="#{clienteBean.cliente.statusCliente}" >
+										<f:selectItem itemValue="#{false}" itemLabel="NÃO" />
+										<f:selectItem itemValue="#{true}" itemLabel="SIM" />
+									</h:selectOneMenu>
+								</div>
+							</div>
+						</div>
+					</fieldset>
+					
+					
+					<fieldset>
+						<div class="form-group">
+							<div class="row">
+								<div class="col-sm-12 col-md-2">
+									<label class="control-label">Saldo Disponível: <sup>*</sup></label>
+									<h:inputText id="saldoCliente" name="saldoCliente" value="#{clienteBean.cliente.saldoCliente}" styleClass="form-control" disabled="#{clienteBean.visualizar}"/>
+								</div>
+							</div>
+						</div>
+					</fieldset>
+					
+					<fieldset>
+						<div class="form-group">
+							<div class="row">
+								<div class="col-sm-12 col-md-2">
+									<label class="control-label">Validade Cartao: <sup>*</sup></label>
+									<div class="input-group">
+										<h:inputText value="#{clienteBean.cliente.validadeCartao}" id="dataFim" styleClass="form-control datepicker" data-dateformat="dd/MM/yyyy" disabled="#{clienteBean.visualizar}"/>
+										<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+									</div>
+								</div>
+								<!-- <div class="col-sm-12 col-md-6">
+									<label class="control-label">Validade Cartao: <sup>*</sup></label>
+									<h:inputText id="validadeCartao" name="validadeCartao" value="#{clienteBean.cliente.validadeCartao}"  styleClass="form-control" disabled="#{clienteBean.visualizar}"/>
+									<input type="text" name="validadeCartao" id="validadeCartao" class="form-control datepicker" data-dateformat="mm/yyyy"/>
+									<span class="input-group-addon"><i class="fa fa-calendar"></i></span>	
+								</div> -->
+							</div>
+						</div>
+					</fieldset>
+					
+					
+					<div class="form-actions">
+						<div class="row">
+							<div class="col-md-12">
+								<p:remoteCommand name="rcSalvar" action="#{clienteBean.salvar()}"/>
+								
+								<h:panelGroup rendered="#{clienteBean.alterar or clienteBean.cliente.id == null}">
+									<button type="submit" id="botaoSalvar" class="btn btn-primary" >
+											Salvar
+									</button>
+								</h:panelGroup>
+								
+								<h:panelGroup rendered="#{clienteBean.visualizar}">
+									<a type="button" class="btn btn-success" href="${request.contextPath}/alterarCliente/codigoCliente=#{clienteBean.cliente.id}" >
+										Alterar
+									</a>
+								</h:panelGroup>
+								
+								<a type="button" class="btn btn-danger" href="${request.contextPath}/listarCliente" >
+									Cancelar
+								</a>
+								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>			
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		</h:form>
+	<script type="text/javascript">
+    //For calendar
+    $(".datepicker").datepicker({
+        inline: true,
+        showWeek: true,
+        firstDay: 1
+    });
+
+</script>
+	</ui:define>
+</ui:composition>
