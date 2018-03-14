@@ -3,28 +3,28 @@ package br.com.marketpay.validaapp.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.marketpay.validaapp.entity.Cliente;
-import br.com.marketpay.validaapp.repository.ClienteRepository;
+import br.com.marketpay.validaapp.entity.Transacao;
+import br.com.marketpay.validaapp.repository.TransacaoRepository;
 
 @Service
-public class TransacaoServiceImpl implements ClienteService{
+public class TransacaoServiceImpl implements TransacaoService{
 
 	@Autowired
-	ClienteRepository clienteRepository;
+	TransacaoRepository transacaoRepository;
 	
 	@Override
-	public Cliente findById(Long id) {
-		return clienteRepository.findById(id);
+	public Transacao findById(Long id) {
+		return transacaoRepository.findById(id);
 	}
 
 	@Override
-	public void save(Cliente cliente) {
-		clienteRepository.save(cliente);
+	public void save(Transacao transacao) {
+		transacaoRepository.save(transacao);
 	}
 
 	@Override
-	public Iterable<Cliente>  listarClientes(String campoPesquisa) {
-		return clienteRepository.findAll();
+	public Iterable<Transacao>  listarTransacoes(String campoPesquisa) {
+		return transacaoRepository.findAll();
 	}
 
 	

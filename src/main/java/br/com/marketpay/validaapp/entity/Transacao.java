@@ -45,7 +45,10 @@ public class Transacao implements Serializable {
 	@Column(name = "STATUS")
 	private String status;
 	
-	@DateTimeFormat(pattern = "dd/MM/yyyy hh:mm:ss")
+	@Column(name = "VALOR")
+	private Double valor;
+	
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Temporal(TemporalType.DATE)
 	@Column(name = "DATA_TRANSACAO")
 	private Date dataTransacao;

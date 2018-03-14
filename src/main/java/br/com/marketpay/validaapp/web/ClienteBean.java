@@ -2,6 +2,7 @@ package br.com.marketpay.validaapp.web;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.text.ParseException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -11,6 +12,7 @@ import br.com.marketpay.validaapp.entity.Cliente;
 import br.com.marketpay.validaapp.entity.ProcessAlterarSenha;
 import br.com.marketpay.validaapp.service.ClienteService;
 import br.com.marketpay.validaapp.service.ProcessAlterarSenhaService;
+import br.com.marketpay.validaapp.util.funcoes.FuncoesData;
 import br.com.marketpay.validaapp.web.util.Flash;
 import br.com.marketpay.validaapp.web.util.Flash.FlashTipo;
 import br.com.marketpay.validaapp.web.util.ValidaAppPages;
@@ -36,6 +38,8 @@ public class ClienteBean extends BeanAbstract implements Serializable{
 	private boolean alterar;
 	
 	private String campoPesquisa;
+	
+	private String dataValidadeCartao;
 	
 	@Getter
 	@Setter
@@ -70,10 +74,25 @@ public class ClienteBean extends BeanAbstract implements Serializable{
 	private void preecherObjeto(){
 		if (cliente != null && cliente.getId() != 0) {
 			cliente = clienteService.findById(new Long(cliente.getId()));
+			if(dataValidadeCartao!=null) {
+				try {
+					cliente.setValidadeCartao(FuncoesData.formataData(dataValidadeCartao));
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
 		}
 	}
 	
 	public String salvar() throws IOException{
+		try {
+			cliente.setValidadeCartao(FuncoesData.formataData(dataValidadeCartao));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		clienteService.save(cliente); 
 		
 		addMensageRedirect(new Flash("Cliente salvo com sucesso", FlashTipo.success));

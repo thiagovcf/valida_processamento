@@ -25,7 +25,7 @@
 									<label class="control-label">Cliente: <sup>*</sup></label>
 									<h:selectOneMenu id="cliente" class="form-control input-sm" value="#{transacaoBean.cliente.id}" style="width: 300px;" required="true" disabled="#{clienteBean.visualizar}">
 										<f:selectItem itemValue="null" itemLabel="Selecione o Cliente" noSelectionOption="true"/>
-										<f:selectItems value="#{clienteBean.clienteAtivo}" var="cliente" itemValue="#{cliente.id}" itemLabel="#{cliente.nome}"/>
+										<f:selectItems value="#{clienteBean.clientes}" var="cliente" itemValue="#{cliente.id}" itemLabel="#{cliente.nome}"/>
 										<f:selectItem itemValue="0" itemLabel="TODOS"/>
 									</h:selectOneMenu>
 								</div>
@@ -55,7 +55,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<ui:repeat value="#{transacaoBean.transacoesFtp}" var="transacao" >
+								<ui:repeat value="#{transacaoBean.transacoes}" var="transacao" >
 									<tr class="success">
 										<td width="15%" >#{transacao.cliente.nome}</td>
 										<td width="15%" class="text-center">#{transacao.valor}</td>

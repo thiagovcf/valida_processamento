@@ -26,7 +26,7 @@
 							<div class="row">
 								<div class="col-sm-12 col-md-6">
 									<label class="control-label">Nome: <sup>*</sup></label>
-									<h:inputText id="nome" name="nome" value="#{clienteBean.cliente.nome}"  styleClass="form-control" disabled="#{clienteBean.visualizar}"/>  
+									<h:inputText id="nome" name="nome" value="#{clienteBean.cliente.nome}"  styleClass="form-control" disabled="#{clienteBean.visualizar}"/>
 								</div>
 							</div>
 						</div>
@@ -37,7 +37,7 @@
 							<div class="row">
 								<div class="col-sm-12 col-md-2">
 									<label class="control-label">CPF: <sup>*</sup></label>
-									<h:inputText id="cpf" name="cpf" value="#{clienteBean.cliente.cpf}" mask="999.999.999-99" styleClass="form-control" disabled="#{clienteBean.visualizar}"/>
+									<h:inputText id="cpf" name="cpf" value="#{clienteBean.cliente.cpf}" data-mask="999.999.999-99" styleClass="form-control" disabled="#{clienteBean.visualizar}"/>
 								</div>
 							</div>
 						</div>
@@ -48,7 +48,7 @@
 							<label class="control-label">Ativo?<sup>*</sup></label>
 							<div class="row">
 								<div class="col-md-2">
-									<h:selectOneMenu id="status" styleClass="form-control input-sm" value ="#{clienteBean.cliente.statusCliente}" >
+									<h:selectOneMenu id="status" styleClass="form-control input-sm" value ="#{clienteBean.cliente.statusCliente}" disabled="#{clienteBean.visualizar}" >
 										<f:selectItem itemValue="#{false}" itemLabel="NÃO" />
 										<f:selectItem itemValue="#{true}" itemLabel="SIM" />
 									</h:selectOneMenu>
@@ -63,28 +63,36 @@
 							<div class="row">
 								<div class="col-sm-12 col-md-2">
 									<label class="control-label">Saldo Disponível: <sup>*</sup></label>
-									<h:inputText id="saldoCliente" name="saldoCliente" value="#{clienteBean.cliente.saldoCliente}" styleClass="form-control" disabled="#{clienteBean.visualizar}"/>
+									<h:inputText id="saldoCliente" name="saldoCliente" value="#{clienteBean.cliente.saldoCliente}" styleClass="form-control" disabled="#{clienteBean.visualizar}" >
+									</h:inputText>
 								</div>
 							</div>
 						</div>
 					</fieldset>
 					
+					<!-- <fieldset>
+						<div class="form-group">
+							<div class="row">
+								<div class="col-sm-12 col-md-2">
+									<label class="control-label">Validade Cartao: <sup>*</sup></label>
+									<div class="input-group">
+										<h:inputText value="#{clienteBean.dataValidadeCartao}" id="validadeCartao" styleClass="form-control datepicker" data-dateformat="mm/yyyy" disabled="#{clienteBean.visualizar} "/>
+										<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</fieldset> -->
 					<fieldset>
 						<div class="form-group">
 							<div class="row">
 								<div class="col-sm-12 col-md-2">
 									<label class="control-label">Validade Cartao: <sup>*</sup></label>
 									<div class="input-group">
-										<h:inputText value="#{clienteBean.cliente.validadeCartao}" id="dataFim" styleClass="form-control datepicker" data-dateformat="dd/MM/yyyy" disabled="#{clienteBean.visualizar}"/>
+										<p:calendar id="calendario" value="#{clienteBean.dataValidadeCartao}" styleClass="form-control datepicker" pattern="MM/yyyy" mask="true"/>
 										<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
 									</div>
 								</div>
-								<!-- <div class="col-sm-12 col-md-6">
-									<label class="control-label">Validade Cartao: <sup>*</sup></label>
-									<h:inputText id="validadeCartao" name="validadeCartao" value="#{clienteBean.cliente.validadeCartao}"  styleClass="form-control" disabled="#{clienteBean.visualizar}"/>
-									<input type="text" name="validadeCartao" id="validadeCartao" class="form-control datepicker" data-dateformat="mm/yyyy"/>
-									<span class="input-group-addon"><i class="fa fa-calendar"></i></span>	
-								</div> -->
 							</div>
 						</div>
 					</fieldset>
@@ -125,7 +133,19 @@
         showWeek: true,
         firstDay: 1
     });
-
+</script>
+<script type="text/javascript">
+    $(function() {
+        $.mask.definitions['~'] = "[+-]";
+        $("#validadeCartao").mask("99/9999",{placeholder:"MM/yyyy",completed:function(){alert("completed!");}});
+        $("#cpf").mask("999.999.999-99");
+        $("#saldoCliente").maskMoney();
+        $("input").blur(function() {
+            $("#info").html("Unmasked value: " + $(this).mask());
+        }).dblclick(function() {
+            $(this).unmask();
+        });
+    });
 </script>
 	</ui:define>
 </ui:composition>

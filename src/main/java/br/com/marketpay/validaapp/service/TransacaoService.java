@@ -10,6 +10,7 @@ public interface TransacaoService {
 
 	Iterable<Transacao> listarTransacoes(String campoPesquisa);
 
+
 	
 }
 

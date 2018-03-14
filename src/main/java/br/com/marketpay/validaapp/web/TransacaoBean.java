@@ -12,11 +12,8 @@ import org.springframework.stereotype.Service;
 
 import br.com.marketpay.validaapp.entity.Cliente;
 import br.com.marketpay.validaapp.entity.Emissor;
-import br.com.marketpay.validaapp.entity.FolderFpt;
 import br.com.marketpay.validaapp.entity.Transacao;
 import br.com.marketpay.validaapp.service.ClienteService;
-import br.com.marketpay.validaapp.service.EmissorService;
-import br.com.marketpay.validaapp.service.FolderFtpService;
 import br.com.marketpay.validaapp.service.TransacaoService;
 import br.com.marketpay.validaapp.service.UtilService;
 import br.com.marketpay.validaapp.web.util.Flash;
@@ -28,7 +25,7 @@ import lombok.EqualsAndHashCode;
 @Service
 @Data
 @EqualsAndHashCode(callSuper = false)
-@Scope("view")
+@Scope("request")
 public class TransacaoBean extends BeanAbstract implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -38,6 +35,8 @@ public class TransacaoBean extends BeanAbstract implements Serializable{
 	private Cliente cliente = new Cliente();
 	
 	private List<Cliente> clientes = new ArrayList<>();
+	
+	private List<Transacao> transacoes = new ArrayList<>();
 	
 	private boolean visualizar;
 	
@@ -54,6 +53,7 @@ public class TransacaoBean extends BeanAbstract implements Serializable{
 	
 	@Autowired
 	private UtilService utilService;
+
 	
 	public void preencherAlterar(){
 		alterar = true;
@@ -82,35 +82,24 @@ public class TransacaoBean extends BeanAbstract implements Serializable{
 	}
 	
 	public void pesquisar(){
-		clientes = null;
 		
 		if(cliente.getId()==0 || cliente == null){
-			Iterable<Transacao> listaTransacao = transacaoService.listarTransacoes("");
+			List<Emissor> listaEmissorAtivo = (List)clienteService.listarClientes(Emissor.STATUS_ATIVA);
 			
 			/*if(StringUtils.isBlank(pesquisaNomePasta.trim())) {
-				clientes = transacaoService.findAllByEmissorIn(listaEmissorAtivo);
+				transacoes = transacaoService.findAllByEmissorIn(listaEmissorAtivo);
 			}else {
-				clientes = transacaoService.findByNomeAndEmissorIn(pesquisaNomePasta,listaEmissorAtivo);
+				transacoes = transacaoService.findByNomeAndEmissorIn(pesquisaNomePasta,listaEmissorAtivo);
 			}*/
 		}else {
 			cliente = clienteService.findById(cliente.getId());
 
-//			if(StringUtils.isNotBlank(pesquisaNomePasta.trim())) {
-//				clientes = transacaoService.findAllByNomeIgnoreCaseContainingAndEmissor(pesquisaNomePasta, cliente);
-//			}else {
-//				clientes = transacaoService.findByEmissor(cliente);
-//			}
+			/*if(StringUtils.isNotBlank(pesquisaNomePasta.trim())) {
+				transacoes = transacaoService.findAllByNomeIgnoreCaseContainingAndEmissor(pesquisaNomePasta, emissor);
+			}else {
+				transacoes = transacaoService.findByEmissor(emissor);
+			}*/
 		}
 	}
-	
-	/*public void testeConexao() throws IOException{
-		Boolean statusConexao;
-		statusConexao = utilService.getStatusConexao(folderFtp.getPorta(),folderFtp.getIp(), folderFtp.getLogin(), folderFtp.getSenha());
-		if (statusConexao) {
-			addMensageRedirect(new Flash("Conexão realizada com sucesso", FlashTipo.success));
-		}else {
-			addMensageRedirect(new Flash("Falha na conexão", FlashTipo.danger));
-		}
-	}*/
 	
 }

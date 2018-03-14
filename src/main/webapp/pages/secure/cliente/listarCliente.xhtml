@@ -26,6 +26,13 @@
 								<label class="control-label">Nome: <sup>*</sup></label>
 								<h:inputText value="#{clienteBean.campoPesquisa}" styleClass="form-control" />  
 							</div>
+							<div class="col-sm-12 col-md-2">
+								<label class="control-label">Data Fim: <sup>*</sup></label>
+								<div class="input-group">
+									<input type="text" name="dataFim" id="dataFim" class="form-control datepicker" data-dateformat="dd/mm/yy"/>
+									<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+								</div>
+							</div>
 
 							<div class="col-sm-12 col-md-1">
 								<label class="control-label" style="color:white">.</label>
@@ -44,21 +51,26 @@
 								<th class="text-center" >Nome</th>
 								<th class="text-center" >CPF</th>
 								<th class="text-center" >Saldo Disponível</th>
+								<th class="text-center" >Validade Cartão</th>
 								<th class="text-center" >Ações</th>
 							</tr>
 						</thead>
 						<tbody>
 							<ui:repeat value="#{clienteBean.clientes}" var="cliente" >
 								<tr class="success">
-									<td width="50%" >#{cliente.nome}</td>
-									<td width="20%" >#{cliente.cpf}</td>
-									<td width="20%" >#{cliente.saldoCliente}</td>
+									<td width="40%" >#{cliente.nome}</td>
+									<td width="15%" >#{cliente.cpf}</td>
+									<td width="15%" >#{cliente.saldoCliente}</td>
+	                               	<td width="15%" >#{cliente.validadeCartao}</td>
 									<td width="10%" class="text-center">
 	                                   <a href="${request.contextPath}/visualizarCliente/codigoCliente=#{cliente.id}" class="btn btn-sm btn-primary">
                                    			<span class="fa fa-search"/>
 					                   </a>
-	                                   <a href="${request.contextPath}/alterarCliente/codigoCliente=#{cliente.id}" class="btn btn-sm btn-primary">
+	                                   <!-- <a href="${request.contextPath}/alterarCliente/codigoCliente=#{cliente.id}" class="btn btn-sm btn-primary">
                                    			<span class="fa fa-pencil"/>
+					                   </a> -->
+					                   <a href="${request.contextPath}/alterarCliente/codigoCliente=#{cliente.id}" class="btn btn-sm btn-danger">
+                                   			<span class="fa fa-trash"/>
 					                   </a>
 	                               </td>
 								</tr>

@@ -1,7 +1,7 @@
 package br.com.marketpay.validaapp.entity;
 
 import java.io.Serializable;
-import java.util.Calendar;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -51,10 +51,10 @@ public class Cliente implements Serializable {
 	@Column(name = "SENHA")
 	private String senha;
 
-	@DateTimeFormat(pattern = "dd/mm/yyyy")
+	@DateTimeFormat(pattern = "mm/yyyy")
 	@Temporal(TemporalType.DATE)
 	@Column(name = "VALIDADE_CARTAO")
-	private Calendar validadeCartao;
+	private Date validadeCartao;
 	
 	@Column(name = "SALDO_CLIENTE")
 	private String saldoCliente;

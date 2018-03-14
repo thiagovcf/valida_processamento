@@ -244,7 +244,6 @@
 	<url-mapping id="listarVendas">
 		<pattern value="/listarVenda" />
 		<view-id value="/pages/secure/transacao/listarTransacao.jsf" />
-		<action>#{clienteBean.init()}</action>
 	</url-mapping>
 	<!-- Fim Venda -->
 </pretty-config>
