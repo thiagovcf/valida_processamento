@@ -23,9 +23,14 @@ public class ClienteServiceImpl implements ClienteService{
 	}
 
 	@Override
-	public Iterable<Cliente>  listarClientes(String campoPesquisa) {
+	public Iterable<Cliente>  listarClientes() {
 		return clienteRepository.findAll();
 	}
+	@Override
+	public Iterable<Cliente>  listarClientes(String campoPesquisa) {
+		return clienteRepository.findAllByNomeContaining(campoPesquisa);
+	}
+
 
 	
 }

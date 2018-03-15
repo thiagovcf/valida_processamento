@@ -8,6 +8,8 @@ import br.com.marketpay.validaapp.entity.Cliente;
 public interface ClienteRepository extends CrudRepository<Cliente, Long> {
 
 	Cliente findById(Long id);
+
+	Iterable<Cliente> findAllByNomeContaining(String campoPesquisa);
 	
 	
 

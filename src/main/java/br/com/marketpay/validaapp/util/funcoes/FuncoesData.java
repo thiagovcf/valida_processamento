@@ -1,5 +1,6 @@
 package br.com.marketpay.validaapp.util.funcoes;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -9,7 +10,7 @@ import java.util.GregorianCalendar;
 public class FuncoesData {
 	
 	private static SimpleDateFormat sdfDataArquivo = new SimpleDateFormat("DDMMyyyy");
-	public static SimpleDateFormat sdfData = new SimpleDateFormat("dd/MM/yyyy");
+	public static SimpleDateFormat sdfData = new SimpleDateFormat("MM/yyyy");
 	
 	public static final long MILIS_POR_DIA = 86400000;
 	
@@ -47,7 +48,6 @@ public class FuncoesData {
 	public static Date formataData(String data) throws ParseException{
 		return sdfData.parse(data);
 	}
-	
 }
 
 

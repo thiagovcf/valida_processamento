@@ -231,11 +231,11 @@
 	<url-mapping id="incluirVenda">
 		<pattern value="/incluirVenda" />
 		<view-id value="/pages/secure/transacao/incluirAlterarTransacao.jsf" />
-		<action>#{clienteBean.init()}</action>
+		<action>#{transacaoBean.init()}</action>
 	</url-mapping>
 	
 	<url-mapping id="visualizarVenda">
-		<pattern value="/visualizarVenda/codigoPasta=#{id:transacaoBean.transacao.id}" />
+		<pattern value="/visualizarVenda/codigoVenda=#{id:transacaoBean.transacao.id}" />
 		<view-id value="/pages/secure/transacao/incluirAlterarTransacao.jsf" />
 		<action>#{transacaoBean.preencherVisualizar()}</action>
 		<action>#{clienteBean.preencheClienteAtivo()}</action>
@@ -244,6 +244,7 @@
 	<url-mapping id="listarVendas">
 		<pattern value="/listarVenda" />
 		<view-id value="/pages/secure/transacao/listarTransacao.jsf" />
+		<action>#{transacaoBean.init()}</action>
 	</url-mapping>
 	<!-- Fim Venda -->
 </pretty-config>

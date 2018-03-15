@@ -10,6 +10,8 @@ public interface ClienteService {
 
 	Iterable<Cliente> listarClientes(String campoPesquisa);
 
+	Iterable<Cliente> listarClientes();
+
 	
 }
 

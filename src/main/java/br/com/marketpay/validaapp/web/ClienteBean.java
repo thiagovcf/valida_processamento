@@ -2,7 +2,9 @@ package br.com.marketpay.validaapp.web;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -12,7 +14,6 @@ import br.com.marketpay.validaapp.entity.Cliente;
 import br.com.marketpay.validaapp.entity.ProcessAlterarSenha;
 import br.com.marketpay.validaapp.service.ClienteService;
 import br.com.marketpay.validaapp.service.ProcessAlterarSenhaService;
-import br.com.marketpay.validaapp.util.funcoes.FuncoesData;
 import br.com.marketpay.validaapp.web.util.Flash;
 import br.com.marketpay.validaapp.web.util.Flash.FlashTipo;
 import br.com.marketpay.validaapp.web.util.ValidaAppPages;
@@ -74,25 +75,14 @@ public class ClienteBean extends BeanAbstract implements Serializable{
 	private void preecherObjeto(){
 		if (cliente != null && cliente.getId() != 0) {
 			cliente = clienteService.findById(new Long(cliente.getId()));
-			if(dataValidadeCartao!=null) {
-				try {
-					cliente.setValidadeCartao(FuncoesData.formataData(dataValidadeCartao));
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
+			SimpleDateFormat sdf = new SimpleDateFormat("MM/yyyy");
+			dataValidadeCartao = sdf.format(cliente.getValidadeCartao());
 
 		}
 	}
 	
 	public String salvar() throws IOException{
-		try {
-			cliente.setValidadeCartao(FuncoesData.formataData(dataValidadeCartao));
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		preencherClienteForm();
 		clienteService.save(cliente); 
 		
 		addMensageRedirect(new Flash("Cliente salvo com sucesso", FlashTipo.success));
@@ -100,6 +90,13 @@ public class ClienteBean extends BeanAbstract implements Serializable{
 		return ValidaAppPages.PAGINA_VISUALIZAR_CLIENTE;
 	}
 	
+	private void preencherClienteForm() {
+		Calendar c = Calendar.getInstance();
+		c.add(Calendar.YEAR, 1);
+		Date newDate = c.getTime();
+		cliente.setValidadeCartao(newDate);
+	}
+
 	public void pesquisar(){
 		clientes = clienteService.listarClientes(campoPesquisa);
 	}

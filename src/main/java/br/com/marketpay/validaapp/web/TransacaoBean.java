@@ -2,16 +2,16 @@ package br.com.marketpay.validaapp.web;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Calendar;
+import java.util.Date;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import br.com.marketpay.validaapp.entity.Cliente;
-import br.com.marketpay.validaapp.entity.Emissor;
 import br.com.marketpay.validaapp.entity.Transacao;
 import br.com.marketpay.validaapp.service.ClienteService;
 import br.com.marketpay.validaapp.service.TransacaoService;
@@ -34,9 +34,9 @@ public class TransacaoBean extends BeanAbstract implements Serializable{
 	
 	private Cliente cliente = new Cliente();
 	
-	private List<Cliente> clientes = new ArrayList<>();
+	private Iterable<Cliente> clientes = new ArrayList<>();
 	
-	private List<Transacao> transacoes = new ArrayList<>();
+	private Iterable	<Transacao> transacoes = new ArrayList<>();
 	
 	private boolean visualizar;
 	
@@ -54,6 +54,14 @@ public class TransacaoBean extends BeanAbstract implements Serializable{
 	@Autowired
 	private UtilService utilService;
 
+	
+	public void init() {
+		preencheClienteAtivo();
+	}
+	
+	public void preencheClienteAtivo(){
+		clientes =  clienteService.listarClientes();
+	}
 	
 	public void preencherAlterar(){
 		alterar = true;
@@ -73,33 +81,39 @@ public class TransacaoBean extends BeanAbstract implements Serializable{
 		}
 	}
 	
-	public String salvar() throws IOException{
+	public String salvar() throws IOException, ParseException{
+		preencherDataTransacaoForm();
+		calcularSaldo();
 		transacaoService.save(transacao); 
+		clienteService.save(cliente);
 		
 		addMensageRedirect(new Flash("Venda realizada com sucesso", FlashTipo.success));
 		
-		return ValidaAppPages.PAGINA_VISUALIZAR_FOLDER;
+		return ValidaAppPages.PAGINA_VISUALIZAR_VENDA;
 	}
 	
+	private void calcularSaldo() {
+		if(transacao.getCliente().getId() !=null) {
+			cliente = clienteService.findById(transacao.getCliente().getId());
+			transacao.setCliente(cliente);
+		}
+		if(transacao.getCliente().getSaldoCliente()>transacao.getValor()) {
+			cliente.setSaldoCliente(transacao.getCliente().getSaldoCliente() - transacao.getValor());
+		}
+		
+	}
+
 	public void pesquisar(){
 		
 		if(cliente.getId()==0 || cliente == null){
-			List<Emissor> listaEmissorAtivo = (List)clienteService.listarClientes(Emissor.STATUS_ATIVA);
-			
-			/*if(StringUtils.isBlank(pesquisaNomePasta.trim())) {
-				transacoes = transacaoService.findAllByEmissorIn(listaEmissorAtivo);
-			}else {
-				transacoes = transacaoService.findByNomeAndEmissorIn(pesquisaNomePasta,listaEmissorAtivo);
-			}*/
+			transacoes = transacaoService.findAll();
 		}else {
-			cliente = clienteService.findById(cliente.getId());
-
-			/*if(StringUtils.isNotBlank(pesquisaNomePasta.trim())) {
-				transacoes = transacaoService.findAllByNomeIgnoreCaseContainingAndEmissor(pesquisaNomePasta, emissor);
-			}else {
-				transacoes = transacaoService.findByEmissor(emissor);
-			}*/
+			transacoes = transacaoService.findAllById(cliente.getId());
 		}
 	}
-	
+	private void preencherDataTransacaoForm() {
+		Calendar c = Calendar.getInstance();
+		Date newDate = c.getTime();
+		transacao.setDataTransacao(newDate);
+	}
 }

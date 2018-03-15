@@ -1,5 +1,7 @@
 package br.com.marketpay.validaapp.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +26,16 @@ public class TransacaoServiceImpl implements TransacaoService{
 
 	@Override
 	public Iterable<Transacao>  listarTransacoes(String campoPesquisa) {
+		return transacaoRepository.findAll();
+	}
+
+	@Override
+	public List<Transacao> findAllById(Long id) {
+		return transacaoRepository.findAllById(id);
+	}
+
+	@Override
+	public Iterable<Transacao> findAll() {
 		return transacaoRepository.findAll();
 	}
 

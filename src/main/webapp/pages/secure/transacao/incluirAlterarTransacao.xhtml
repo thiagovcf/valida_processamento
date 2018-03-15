@@ -26,14 +26,10 @@
 						<div class="form-group">
 							<div class="row">
 								<div class="col-md-4">
-									<h:selectOneMenu id="cliente"
-										styleClass="form-control input-sm"
-										value="#{transacaoBean.cliente.id}" required="true"
-										disabled="#{transacaoBean.visualizar}">
+									<h:selectOneMenu id="cliente" styleClass="form-control input-sm"
+										value="#{transacaoBean.transacao.cliente.id}" required="true" disabled="#{transacaoBean.visualizar}">
 										<f:selectItem itemValue="" itemLabel="Selecione o Cliente" />
-										<f:selectItems value="#{clienteBean.clientes}"
-											var="cliente" itemValue="#{cliente.id}"
-											itemLabel="#{cliente.nome}" />
+										<f:selectItems value="#{transacaoBean.clientes}" var="cliente" itemValue="#{cliente.id}" itemLabel="#{cliente.nome}" />
 									</h:selectOneMenu>
 								</div>
 							</div>
@@ -57,8 +53,7 @@
 						<div class="form-actions">
 							<div class="row">
 								<div class="col-md-12">
-									<p:remoteCommand name="rcSalvar"
-										action="#{transacaoBean.salvar()}" />
+									<p:remoteCommand name="rcSalvar" action="#{transacaoBean.salvar()}" />
 
 									<h:panelGroup
 										rendered="#{transacaoBean.alterar or transacaoBean.transacao.id == null}">
@@ -67,13 +62,12 @@
 									</h:panelGroup>
 
 									<a type="button" class="btn btn-danger"
-										href="${request.contextPath}/listarTransacao"> Cancelar </a>
+										href="${request.contextPath}/listarVenda"> Cancelar </a>
 								</div>
 							</div>
 						</div>
 				</div>
 			</div>
-
 		</h:form>
 	<script type="text/javascript">
     $(function() {

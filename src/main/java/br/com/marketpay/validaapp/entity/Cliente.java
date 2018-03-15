@@ -46,7 +46,7 @@ public class Cliente implements Serializable {
 	private String cpf;
 
 	@Column(name = "statusCliente")
-	private String statusCliente = STATUS_ATIVA;
+	private Boolean statusCliente;
 
 	@Column(name = "SENHA")
 	private String senha;
@@ -57,6 +57,6 @@ public class Cliente implements Serializable {
 	private Date validadeCartao;
 	
 	@Column(name = "SALDO_CLIENTE")
-	private String saldoCliente;
+	private Double saldoCliente;
 
 }

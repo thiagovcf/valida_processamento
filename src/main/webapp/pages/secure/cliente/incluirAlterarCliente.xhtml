@@ -49,8 +49,8 @@
 							<div class="row">
 								<div class="col-md-2">
 									<h:selectOneMenu id="status" styleClass="form-control input-sm" value ="#{clienteBean.cliente.statusCliente}" disabled="#{clienteBean.visualizar}" >
-										<f:selectItem itemValue="#{false}" itemLabel="NÃO" />
-										<f:selectItem itemValue="#{true}" itemLabel="SIM" />
+										<f:selectItem itemValue="#{true}" itemLabel="Ativo" />
+										<f:selectItem itemValue="#{false}" itemLabel="Inativo" />
 									</h:selectOneMenu>
 								</div>
 							</div>
@@ -83,25 +83,33 @@
 							</div>
 						</div>
 					</fieldset> -->
-					<fieldset>
-						<div class="form-group">
-							<div class="row">
-								<div class="col-sm-12 col-md-2">
-									<label class="control-label">Validade Cartao: <sup>*</sup></label>
-									<div class="input-group">
-										<p:calendar id="calendario" value="#{clienteBean.dataValidadeCartao}" styleClass="form-control datepicker" pattern="MM/yyyy" mask="true"/>
-										<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+					<h:panelGroup rendered="#{clienteBean.visualizar}">
+						<fieldset>
+							<div class="form-group">
+								<div class="row">
+									<div class="col-sm-12 col-md-2">
+										<label class="control-label">Validade Cartao: <sup>*</sup></label>
+										<div class="input-group col-sm-12 col-md-2">
+											<p:calendar id="calendario" value="#{clienteBean.dataValidadeCartao}"  pattern="MM/yyyy" mask="true" disabled="#{clienteBean.visualizar}"/>
+											<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-					</fieldset>
+						</fieldset>
+					</h:panelGroup>
 					
 					
 					<div class="form-actions">
 						<div class="row">
 							<div class="col-md-12">
 								<p:remoteCommand name="rcSalvar" action="#{clienteBean.salvar()}"/>
+								
+								<h:panelGroup rendered="#{clienteBean.alterar or clienteBean.cliente.id == null}">
+									<button type="submit" id="botaoLimpar" class="btn btn-info" >
+											Limpar
+									</button>
+								</h:panelGroup>
 								
 								<h:panelGroup rendered="#{clienteBean.alterar or clienteBean.cliente.id == null}">
 									<button type="submit" id="botaoSalvar" class="btn btn-primary" >
@@ -118,7 +126,8 @@
 								<a type="button" class="btn btn-danger" href="${request.contextPath}/listarCliente" >
 									Cancelar
 								</a>
-								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>			
+								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>	
+										
 							</div>
 						</div>
 					</div>

@@ -52,4 +52,5 @@ public class Transacao implements Serializable {
 	@Temporal(TemporalType.DATE)
 	@Column(name = "DATA_TRANSACAO")
 	private Date dataTransacao;
+
 }

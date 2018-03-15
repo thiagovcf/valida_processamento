@@ -24,4 +24,6 @@ public class ValidaAppPages {
 	
 	public static final String PAGINA_VISUALIZAR_CLIENTE = "pretty:visualizarCliente";
 	public static final String PAGINA_ALTERAR_CLIENTE = "pretty:alterarCliente";
+	
+	public static final String PAGINA_VISUALIZAR_VENDA = "pretty:visualizarVenda";
 }

@@ -1,5 +1,6 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	template="../templates/templateGeral.xhtml">
@@ -26,10 +27,10 @@
 								<label class="control-label">Nome: <sup>*</sup></label>
 								<h:inputText value="#{clienteBean.campoPesquisa}" styleClass="form-control" />  
 							</div>
-							<div class="col-sm-12 col-md-2">
-								<label class="control-label">Data Fim: <sup>*</sup></label>
-								<div class="input-group">
-									<input type="text" name="dataFim" id="dataFim" class="form-control datepicker" data-dateformat="dd/mm/yy"/>
+							<div class="col-sm-12 col-md-3">
+								<label class="control-label">Data Validade: <sup>*</sup></label>
+								<div class="input-group col-sm-12 col-md-3">
+									<p:calendar id="calendario"  pattern="MM/yyyy" mask="true" />
 									<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
 								</div>
 							</div>
@@ -57,7 +58,27 @@
 						</thead>
 						<tbody>
 							<ui:repeat value="#{clienteBean.clientes}" var="cliente" >
+							<h:panelGroup rendered="#{cliente.statusCliente == true}">
 								<tr class="success">
+									<td width="40%" >#{cliente.nome}</td>
+									<td width="15%" >#{cliente.cpf}</td>
+									<td width="15%" >R$ #{cliente.saldoCliente}</td>
+	                               	<td width="15%" >#{cliente.validadeCartao}</td>
+									<td width="10%" class="text-center">
+	                                   <a href="${request.contextPath}/visualizarCliente/codigoCliente=#{cliente.id}" class="btn btn-sm btn-primary">
+                                   			<span class="fa fa-search"/>
+					                   </a>
+	                                   <!-- <a href="${request.contextPath}/alterarCliente/codigoCliente=#{cliente.id}" class="btn btn-sm btn-primary">
+                                   			<span class="fa fa-pencil"/>
+					                   </a> -->
+					                   <a href="${request.contextPath}/alterarCliente/codigoCliente=#{cliente.id}" class="btn btn-sm btn-danger">
+                                   			<span class="fa fa-trash"/>
+					                   </a>
+	                               </td>
+								</tr>
+							</h:panelGroup>
+							<h:panelGroup rendered="#{cliente.statusCliente == false}">
+								<tr class="danger">
 									<td width="40%" >#{cliente.nome}</td>
 									<td width="15%" >#{cliente.cpf}</td>
 									<td width="15%" >#{cliente.saldoCliente}</td>
@@ -74,9 +95,22 @@
 					                   </a>
 	                               </td>
 								</tr>
+							</h:panelGroup>
 							</ui:repeat>
 						</tbody>
 					</table>
+					<div class="col-sm-2">
+						<div class="col col-2">
+							<span class="btn btn-sm btn-danger" style="font-size:10px"> <i class="fa fa-cogs"></i> </span>
+							<strong>Cliente Bloqueado</strong>		
+						</div>
+					</div>
+					<div class="col-sm-2">
+						<div class="col col-2">
+							<span class="btn btn-sm btn-success" style="font-size:10px"> <i class="fa fa-cogs"></i> </span>
+							<strong>Cliente Ativo</strong>	
+						</div>
+					</div>
 				</div>
 			</div>
 		</h:form>

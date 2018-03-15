@@ -24,9 +24,8 @@
 								<div class="col-sm-12 col-md-6">
 									<label class="control-label">Cliente: <sup>*</sup></label>
 									<h:selectOneMenu id="cliente" class="form-control input-sm" value="#{transacaoBean.cliente.id}" style="width: 300px;" required="true" disabled="#{clienteBean.visualizar}">
-										<f:selectItem itemValue="null" itemLabel="Selecione o Cliente" noSelectionOption="true"/>
-										<f:selectItems value="#{clienteBean.clientes}" var="cliente" itemValue="#{cliente.id}" itemLabel="#{cliente.nome}"/>
 										<f:selectItem itemValue="0" itemLabel="TODOS"/>
+										<f:selectItems value="#{transacaoBean.clientes}" var="cliente" itemValue="#{cliente.id}" itemLabel="#{cliente.nome}"/>
 									</h:selectOneMenu>
 								</div>
 							</div>
@@ -50,6 +49,8 @@
 							<thead>
 								<tr>
 									<th class="text-center" >Cliente</th>
+									<th class="text-center" >CPF</th>
+									<th class="text-center" >Data transação</th>
 									<th class="text-center" >Valor</th>
 									<th class="text-center" >Ações</th>
 								</tr>
@@ -57,26 +58,19 @@
 							<tbody>
 								<ui:repeat value="#{transacaoBean.transacoes}" var="transacao" >
 									<tr class="success">
-										<td width="15%" >#{transacao.cliente.nome}</td>
-										<td width="15%" class="text-center">#{transacao.valor}</td>
-										<td width="20%" class="text-center">
+										<td width="40%" >#{transacao.cliente.nome}</td>
+										<td width="15%" class="text-center">#{transacao.cliente.cpf}</td>
+										<td width="15%" class="text-center">#{transacao.dataTransacao}</td>
+										<td width="15%" class="text-center">R$ #{transacao.valor}</td>
+										<td width="10%" class="text-center">
+		                                   <a href="${request.contextPath}/visualizarVenda/codigoVenda=#{transacao.cliente.id}" class="btn btn-sm btn-primary">
+	                                   			<span class="fa fa-search"/>
+						                   </a>
 		                               </td>
 									</tr>
 								</ui:repeat>
 							</tbody>
 						</table>
-					</div>
-					<div class="col-sm-2">
-						<div class="col col-2">
-							<span class="btn btn-sm btn-danger" style="font-size:10px"> <i class="fa fa-cogs"></i> </span>
-							<strong>Venda cancelada</strong>		
-						</div>
-					</div>
-					<div class="col-sm-2">
-						<div class="col col-2">
-							<span class="btn btn-sm btn-warning" style="font-size:10px"> <i class="fa fa-cogs"></i> </span>
-							<strong>Venda Aprovada</strong>	
-						</div>
 					</div>
 				</div>
 			</div>

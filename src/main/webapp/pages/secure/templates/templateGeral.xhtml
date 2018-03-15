@@ -38,13 +38,21 @@
 		<link rel="apple-touch-startup-image" href="#{facesContext.externalContext.request.contextPath}/resources/img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)"/>
 		<link rel="apple-touch-startup-image" href="#{facesContext.externalContext.request.contextPath}/resources/img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)"/>
 		<link rel="apple-touch-startup-image" href="#{facesContext.externalContext.request.contextPath}/resources/img/splash/iphone.png" media="screen and (max-device-width: 320px)"/>
+		
+		<style>
+            #calendario_input{
+                box-shadow:none !important; 
+                -webkit-box-shadow:none !important;
+            }
+        </style>
+        
 	</h:head>
 	
 	<h:body styleClass="desktop-detected menu-on-top pace-done smart-style-1" >
 		<f:view>
 			<header id="header">
 				<div id="logo-group">
-					<span id="logo"> <img src="#{facesContext.externalContext.request.contextPath}/resources/imagesApp/mktpay.jpg" alt="valida" style="width:200px;margin-top: -13px; margin-left: -10px;" /> </span>
+					<span id="logo"> <img src="#{facesContext.externalContext.request.contextPath}/resources/imagesApp/logoCDT-1.png" alt="valida" style="width:130px;margin-top: -13px; margin-left: -10px;" /> </span>
 				</div>
 	
 				<div class="pull-right">
@@ -74,7 +82,7 @@
 							<a href="${request.contextPath}/inicio" title="Inicio"><i class="fa fa-home"></i> <span class="menu-item-parent">Inicio</span></a>
 						</li>
 					</ul> 
-					<ul>
+					<!-- <ul>
 						<li>
 							<a href="#" title="Processamento"><i class="fa fa-lg fa-fw fa-spinner"></i> <span class="menu-item-parent" style="max-width: 200px;">Processamento</span></a>
 							<ul>
@@ -137,7 +145,7 @@
 								</li>
 							</ul>	
 						</li>
-					</ul>
+					</ul> -->
 					<ul>
 						<li>
 							<a href="#" title="QA"><i class="fa fa-lg fa-fw fa-heart"></i> <span class="menu-item-parent">QA</span></a>
