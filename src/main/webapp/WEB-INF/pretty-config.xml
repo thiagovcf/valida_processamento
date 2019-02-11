@@ -217,13 +217,13 @@
 	<url-mapping id="visualizarCliente">
 		<pattern value="/visualizarCliente/codigoCliente=#{id:clienteBean.cliente.id}" />
 		<view-id value="/pages/secure/cliente/incluirAlterarCliente.jsf" />
-		<action>#{clienteBean.preencherVisualizar()}</action>
+		<action>#{clienteBean.preencherVisualizar}</action>
 	</url-mapping>
 	
 	<url-mapping id="alterarCliente">
 		<pattern value="/alterarCliente/codigoCliente=#{id:clienteBean.cliente.id}" />
 		<view-id value="/pages/secure/cliente/incluirAlterarCliente.jsf" />
-			<action>#{clienteBean.preencherAlterar()}</action>
+			<action>#{clienteBean.preencherAlterar}</action>
 	</url-mapping>
 	<!-- Fim cliente -->
 	
@@ -231,20 +231,20 @@
 	<url-mapping id="incluirVenda">
 		<pattern value="/incluirVenda" />
 		<view-id value="/pages/secure/transacao/incluirAlterarTransacao.jsf" />
-		<action>#{transacaoBean.init()}</action>
+		<action>#{transacaoBean.init}</action>
 	</url-mapping>
 	
 	<url-mapping id="visualizarVenda">
 		<pattern value="/visualizarVenda/codigoVenda=#{id:transacaoBean.transacao.id}" />
 		<view-id value="/pages/secure/transacao/incluirAlterarTransacao.jsf" />
-		<action>#{transacaoBean.preencherVisualizar()}</action>
-		<action>#{clienteBean.preencheClienteAtivo()}</action>
+		<action>#{transacaoBean.preencherVisualizar}</action>
+		<action>#{clienteBean.preencheClienteAtivo}</action>
 	</url-mapping>
 		
 	<url-mapping id="listarVendas">
 		<pattern value="/listarVenda" />
 		<view-id value="/pages/secure/transacao/listarTransacao.jsf" />
-		<action>#{transacaoBean.init()}</action>
+		<action>#{transacaoBean.init}</action>
 	</url-mapping>
 	<!-- Fim Venda -->
 </pretty-config>

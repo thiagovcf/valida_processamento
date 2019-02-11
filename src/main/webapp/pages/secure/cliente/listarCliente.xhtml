@@ -37,7 +37,11 @@
 
 							<div class="col-sm-12 col-md-1">
 								<label class="control-label" style="color:white">.</label>
-								<h:commandButton value="Pesquisar" styleClass="btn btn-primary form-control"  actionListener="#{clienteBean.pesquisar()}" /> 
+								<h:commandButton value="Pesquisar" styleClass="btn btn-primary form-control"  actionListener="#{clienteBean.pesquisar}" /> 
+							</div>
+							<div class="col-sm-12 col-md-2">
+								<label class="control-label" style="color:white">.</label>
+								<h:commandButton value="Limpar Base" styleClass="btn btn-danger form-control"  actionListener="#{clienteBean.deleteDataBase}" /> 
 							</div>
 						</div>
 					</div>

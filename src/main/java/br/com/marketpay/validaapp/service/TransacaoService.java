@@ -16,6 +16,8 @@ public interface TransacaoService {
 
 	Iterable<Transacao> findAll();
 
+	void deleteAll();
+
 
 	
 }

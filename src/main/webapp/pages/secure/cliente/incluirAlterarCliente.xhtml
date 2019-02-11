@@ -103,7 +103,7 @@
 					<div class="form-actions">
 						<div class="row">
 							<div class="col-md-12">
-								<p:remoteCommand name="rcSalvar" action="#{clienteBean.salvar()}"/>
+								<p:remoteCommand name="rcSalvar" action="#{clienteBean.salvar}"/>
 								
 								<h:panelGroup rendered="#{clienteBean.alterar or clienteBean.cliente.id == null}">
 									<button type="submit" id="botaoLimpar" class="btn btn-info" >

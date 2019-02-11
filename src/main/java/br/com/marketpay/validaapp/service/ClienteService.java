@@ -12,6 +12,8 @@ public interface ClienteService {
 
 	Iterable<Cliente> listarClientes();
 
+	void deleteAll();
+
 	
 }
 

@@ -39,5 +39,9 @@ public class TransacaoServiceImpl implements TransacaoService{
 		return transacaoRepository.findAll();
 	}
 
+	@Override
+	public void deleteAll() {
+		transacaoRepository.deleteAll();;
+	}
 	
 }

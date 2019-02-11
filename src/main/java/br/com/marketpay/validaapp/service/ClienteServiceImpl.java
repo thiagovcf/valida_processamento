@@ -31,6 +31,12 @@ public class ClienteServiceImpl implements ClienteService{
 		return clienteRepository.findAllByNomeContaining(campoPesquisa);
 	}
 
+	@Override
+	public void deleteAll() {
+		clienteRepository.deleteAll();
+		
+	}
+
 
 	
 }

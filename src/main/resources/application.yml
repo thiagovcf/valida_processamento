@@ -1,6 +1,6 @@
 server:
         port: 9090
-        context-path: /validaprocessamento          
+        context-path: /desafioqa          
 debug:
     false 
 spring:

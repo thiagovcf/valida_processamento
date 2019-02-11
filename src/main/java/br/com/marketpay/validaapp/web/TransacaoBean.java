@@ -97,7 +97,7 @@ public class TransacaoBean extends BeanAbstract implements Serializable{
 			cliente = clienteService.findById(transacao.getCliente().getId());
 			transacao.setCliente(cliente);
 		}
-		if(transacao.getCliente().getSaldoCliente()>transacao.getValor()) {
+		if(transacao.getCliente().getSaldoCliente()>=transacao.getValor()) {
 			cliente.setSaldoCliente(transacao.getCliente().getSaldoCliente() - transacao.getValor());
 		}
 		

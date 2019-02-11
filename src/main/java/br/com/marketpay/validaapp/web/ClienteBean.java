@@ -14,6 +14,7 @@ import br.com.marketpay.validaapp.entity.Cliente;
 import br.com.marketpay.validaapp.entity.ProcessAlterarSenha;
 import br.com.marketpay.validaapp.service.ClienteService;
 import br.com.marketpay.validaapp.service.ProcessAlterarSenhaService;
+import br.com.marketpay.validaapp.service.TransacaoService;
 import br.com.marketpay.validaapp.web.util.Flash;
 import br.com.marketpay.validaapp.web.util.Flash.FlashTipo;
 import br.com.marketpay.validaapp.web.util.ValidaAppPages;
@@ -51,6 +52,9 @@ public class ClienteBean extends BeanAbstract implements Serializable{
 	
 	@Autowired
 	private ClienteService clienteService;
+	
+	@Autowired
+	private TransacaoService transacaoService;
 	
 	public void init() {
 		preencheClienteAtivo();
@@ -117,6 +121,14 @@ public class ClienteBean extends BeanAbstract implements Serializable{
 	}
 	public Cliente getClienteSessao() {
 		return cliente;
+	}
+	
+	public String deleteDataBase() {
+		transacaoService.deleteAll();
+		clienteService.deleteAll();
+		addMensageRedirect(new Flash("Base Limpa com sucesso", FlashTipo.success));
+		
+		return ValidaAppPages.PAGINA_LISTAR_CLIENTE;
 	}
 	
 }
